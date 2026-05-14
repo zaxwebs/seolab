@@ -133,13 +133,13 @@
 					? 'bg-[color:var(--brand-pink)]/10 text-[color:var(--brand-pink)]'
 					: 'bg-[color:var(--brand-cyan)]/10 text-[color:var(--brand-cyan)]'}
 	<Card.Root class="overflow-hidden border-transparent">
-		<Card.Header class="flex-row items-center justify-between">
-			<div>
-				<Card.Description>{label}</Card.Description>
-				<Card.Title class="mt-1 text-3xl">{value}</Card.Title>
-			</div>
-			<div class={`grid size-10 place-items-center rounded-full ${toneClass}`}>
-				<Icon class="size-5" />
+		<Card.Header>
+			<Card.Description>{label}</Card.Description>
+			<div class="mt-2 flex items-center gap-3">
+				<div class={`grid size-10 place-items-center rounded-full ${toneClass}`}>
+					<Icon class="size-5" />
+				</div>
+				<Card.Title class="text-4xl leading-none">{value}</Card.Title>
 			</div>
 		</Card.Header>
 	</Card.Root>

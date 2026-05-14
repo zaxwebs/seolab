@@ -166,7 +166,7 @@
 	}
 
 	.list-row {
-		@apply flex w-full items-center justify-between gap-4 rounded-xl border bg-card/90 p-3 text-left transition-colors hover:border-ring hover:bg-accent/40;
+		@apply flex w-full items-center justify-between gap-4 rounded-xl border bg-card/90 p-3 text-left transition-colors hover:border-primary/25 hover:bg-accent/40;
 	}
 
 	.surface-panel {
