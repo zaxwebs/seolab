@@ -7,7 +7,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import SelectField from '$lib/components/SelectField.svelte';
-	import { isReadyForReview, statusBadgeClass, toDateInput } from '$lib/seolab.js';
+	import { formatDisplayDate, isReadyForReview, statusBadgeClass } from '$lib/seolab.js';
 
 	let { data } = $props();
 </script>
@@ -110,7 +110,7 @@
 								</Table.Cell>
 								<Table.Cell>{experiment.experiment_type}</Table.Cell>
 								<Table.Cell>{experiment.primary_metric}</Table.Cell>
-								<Table.Cell>{toDateInput(experiment.expected_review_date) || 'Not set'}</Table.Cell>
+								<Table.Cell>{formatDisplayDate(experiment.expected_review_date) || 'Not set'}</Table.Cell>
 								<Table.Cell>
 									<div class="flex flex-wrap gap-1">
 										{#each experiment.tags ?? [] as tag}

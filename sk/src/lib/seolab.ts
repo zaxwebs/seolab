@@ -130,6 +130,15 @@ export function toDateInput(value?: string): string {
 	return value.slice(0, 10);
 }
 
+export function formatDisplayDate(value?: string): string {
+	const date = toDateInput(value);
+	if (!date) return '';
+	const [year, month, day] = date.split('-').map(Number);
+	if (!year || !month || !day) return '';
+	const monthLabel = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(Date.UTC(year, month - 1, day)));
+	return `${day} ${monthLabel}, ${year}`;
+}
+
 export function todayInput(): string {
 	return new Date().toISOString().slice(0, 10);
 }

@@ -9,7 +9,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import SelectField from '$lib/components/SelectField.svelte';
-	import { isReadyForReview, statusBadgeClass, toDateInput } from '$lib/seolab.js';
+	import { formatDisplayDate, isReadyForReview, statusBadgeClass } from '$lib/seolab.js';
 
 	let { data } = $props();
 </script>
@@ -94,7 +94,7 @@
 							</div>
 							<div class="text-sm text-muted-foreground md:text-right">
 								<p>Metric: {experiment.primary_metric}</p>
-								<p>Review: {toDateInput(experiment.expected_review_date) || 'Not set'}</p>
+								<p>Review: {formatDisplayDate(experiment.expected_review_date) || 'Not set'}</p>
 							</div>
 						</a>
 					{/each}

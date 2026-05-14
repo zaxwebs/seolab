@@ -9,7 +9,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
-	import { logTypeBadgeClass, reviewTimingBadgeClass, reviewTimingLabel, statusBadgeClass, toDateInput } from '$lib/seolab.js';
+	import { formatDisplayDate, logTypeBadgeClass, reviewTimingBadgeClass, reviewTimingLabel, statusBadgeClass } from '$lib/seolab.js';
 
 	let { data } = $props();
 </script>
@@ -48,7 +48,7 @@
 							<div>
 								<p class="font-medium">{experiment.title}</p>
 								<p class="text-sm text-muted-foreground">
-									{data.websites.find((website) => website.id === experiment.website)?.name} · {toDateInput(experiment.expected_review_date)}
+									{data.websites.find((website) => website.id === experiment.website)?.name} · {formatDisplayDate(experiment.expected_review_date)}
 								</p>
 							</div>
 							<Badge class={reviewTimingBadgeClass(experiment.expected_review_date)}>
@@ -75,7 +75,7 @@
 								<p class="font-medium">
 									{data.experiments.find((experiment) => experiment.id === log.experiment)?.title}
 								</p>
-								<p class="text-sm text-muted-foreground">{toDateInput(log.log_date) || 'Undated'}</p>
+								<p class="text-sm text-muted-foreground">{formatDisplayDate(log.log_date) || 'Undated'}</p>
 							</div>
 							<Badge class={logTypeBadgeClass(log.log_type)}>{log.log_type}</Badge>
 						</a>

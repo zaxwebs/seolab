@@ -16,6 +16,7 @@
 		ACTIVE_STATUSES,
 		CONFIDENCE_LEVELS,
 		arrayToComma,
+		formatDisplayDate,
 		logTypeBadgeClass,
 		statusBadgeClass,
 		toDateInput,
@@ -140,7 +141,7 @@
 								<article class="grid gap-4 py-5 first:pt-0 last:pb-0 md:grid-cols-[150px_minmax(0,1fr)]">
 									<div class="space-y-2">
 										<Badge class={logTypeBadgeClass(log.log_type)}>{log.log_type}</Badge>
-										<p class="text-sm text-muted-foreground">{toDateInput(log.log_date)}</p>
+										<p class="text-sm text-muted-foreground">{formatDisplayDate(log.log_date)}</p>
 									</div>
 									<div class="min-w-0">
 										<div class="mb-2 flex flex-wrap items-start justify-between gap-3">
@@ -286,8 +287,8 @@
 					<section class="space-y-3 border-t pt-4">
 						{@render Row('Primary metric', data.experiment.primary_metric)}
 						{@render Row('Confidence', data.experiment.confidence || 'Not set')}
-						{@render Row('Start', toDateInput(data.experiment.start_date) || 'Not set')}
-						{@render Row('End', toDateInput(data.experiment.end_date) || 'Not set')}
+						{@render Row('Start', formatDisplayDate(data.experiment.start_date) || 'Not set')}
+						{@render Row('End', formatDisplayDate(data.experiment.end_date) || 'Not set')}
 					</section>
 
 					<section class="space-y-2 border-t pt-4">
