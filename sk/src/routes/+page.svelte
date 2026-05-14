@@ -2,6 +2,7 @@
 	import type { Component } from 'svelte';
 	import BookOpenIcon from '@lucide/svelte/icons/book-open';
 	import ClipboardCheckIcon from '@lucide/svelte/icons/clipboard-check';
+	import FlaskConicalIcon from '@lucide/svelte/icons/flask-conical';
 	import Globe2Icon from '@lucide/svelte/icons/globe-2';
 	import PlusIcon from '@lucide/svelte/icons/plus';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -28,10 +29,10 @@
 	</div>
 
 	<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-		{@render StatCard('Total websites', data.websites.length)}
-		{@render StatCard('Active experiments', data.activeExperiments.length)}
-		{@render StatCard('Review queue', data.reviewQueue.length)}
-		{@render StatCard('Recent logs', data.recentLogs.length)}
+		{@render StatCard('Total websites', data.websites.length, Globe2Icon, 'blue')}
+		{@render StatCard('Active experiments', data.activeExperiments.length, FlaskConicalIcon, 'purple')}
+		{@render StatCard('Review queue', data.reviewQueue.length, ClipboardCheckIcon, 'pink')}
+		{@render StatCard('Recent logs', data.recentLogs.length, BookOpenIcon, 'cyan')}
 	</div>
 
 	<div class="grid gap-4 xl:grid-cols-2">
@@ -121,11 +122,25 @@
 	</Card.Root>
 </section>
 
-{#snippet StatCard(label: string, value: number)}
-	<Card.Root>
-		<Card.Header>
-			<Card.Description>{label}</Card.Description>
-			<Card.Title class="text-3xl">{value}</Card.Title>
+{#snippet StatCard(label: string, value: number, icon: Component, tone: 'blue' | 'purple' | 'pink' | 'cyan')}
+	{@const Icon = icon}
+	{@const toneClass =
+		tone === 'blue'
+			? 'bg-[color:var(--brand-blue)]/10 text-[color:var(--brand-blue)]'
+			: tone === 'purple'
+				? 'bg-[color:var(--brand-purple)]/10 text-[color:var(--brand-purple)]'
+				: tone === 'pink'
+					? 'bg-[color:var(--brand-pink)]/10 text-[color:var(--brand-pink)]'
+					: 'bg-[color:var(--brand-cyan)]/10 text-[color:var(--brand-cyan)]'}
+	<Card.Root class="overflow-hidden border-transparent">
+		<Card.Header class="flex-row items-center justify-between">
+			<div>
+				<Card.Description>{label}</Card.Description>
+				<Card.Title class="mt-1 text-3xl">{value}</Card.Title>
+			</div>
+			<div class={`grid size-10 place-items-center rounded-full ${toneClass}`}>
+				<Icon class="size-5" />
+			</div>
 		</Card.Header>
 	</Card.Root>
 {/snippet}

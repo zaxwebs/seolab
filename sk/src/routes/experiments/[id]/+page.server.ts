@@ -74,6 +74,26 @@ export const actions = {
 			end_date: active ? null : todayInput()
 		});
 	},
+	review: async ({ request, params }) => {
+		const form = await request.formData();
+		const status = text(form, 'status') as ExperimentStatus;
+		const resultSummary = text(form, 'result_summary');
+		if (!['Won', 'Lost', 'Inconclusive', 'Abandoned'].includes(status)) {
+			error(400, 'Choose a valid review outcome.');
+		}
+		if (!resultSummary) {
+			error(400, 'Add a result summary before saving the review.');
+		}
+
+		await serverPb().collection('experiments').update(params.id, {
+			status,
+			confidence: nullable(text(form, 'confidence')),
+			result_summary: resultSummary,
+			learnings: text(form, 'learnings'),
+			next_action: text(form, 'next_action'),
+			end_date: todayInput()
+		});
+	},
 	reviewDate: async ({ request, params }) => {
 		const form = await request.formData();
 		await serverPb().collection('experiments').update(params.id, {
